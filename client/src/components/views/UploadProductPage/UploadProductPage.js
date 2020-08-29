@@ -38,6 +38,10 @@ function UploadProductPage(){
     const continentChangeHandler = (event) => {
         setContinent(event.currentTarget.value);  
     }
+
+    const updateImages = (newImages) => {
+        setImage(newImages);
+    }
     return(
         <div style ={{ maxWitdh: '700px', margin: '2rem auto' }}>
             <div style ={{textAlign : 'center', marginBottom : '2rem'}}>
@@ -47,7 +51,8 @@ function UploadProductPage(){
             <Form>
                 {/* DropZone */}
 
-                <FileUpload/>
+                <FileUpload refreshFucntion={updateImages}/>
+                
                 <br/>
                 <br/>
                 <label>이름</label>
