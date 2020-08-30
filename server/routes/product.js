@@ -44,13 +44,13 @@ router.post('/', (req, res) => {
 
 router.post('/products', (req, res) => {
 
-  // 받아온 정보들을 DB에 넣어준다.
-  const product = new Product(req.body);
-
-  product.save((err) => {
-    if(err)   return res.status(400).json({success : false , err});
-    return res.status(200).json({success : true})
-  });
+  // product collection에 들어 있는 모든 상품 정보를 가져오기
+  Product.find()
+    .populate("writer") // populate 등록한 사람에 대한 이름 이미지 이메일주소 가 필요해서 사용
+    .exec((err, productInfo) => {
+        if(err)   return res.status(400).json({success : false ,err });
+        return res.status(200).json({success : true, productInfo})
+    })
 })
 
 
