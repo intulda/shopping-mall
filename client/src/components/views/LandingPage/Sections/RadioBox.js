@@ -14,7 +14,7 @@ function RadioBox(props){
     )
 
     // 변경시
-    const handleChange = (event) => {debugger;
+    const handleChange = (event) => {
         setValue(event.target.value)
         // 부모 컴퍼넌트에 전달
         props.handleFilters(event.target.value)

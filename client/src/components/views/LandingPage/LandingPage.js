@@ -88,6 +88,21 @@ function LandingPage() {
         setSkip(0);
    }
 
+   // 맞는 값의 dats에서 찾아서 넣어준다.
+   const handlePrice = (value) => {
+        const data = price;
+        let array = [];
+
+        for(let key in data){
+            if(data[key]._id === parseInt(value,10)){
+                array = data[key].array;
+            }
+        }
+
+        return array;
+   }
+
+
    const handleFilters = (filters, category) => {
   
       const newFilters = { ...Filters }         // 선택된 값들을 가져온다
@@ -95,6 +110,14 @@ function LandingPage() {
       newFilters[category] = filters;
         debugger;
       showFilteredResults(newFilters);
+
+      if(category === "price"){
+          let priceValues = handlePrice(filters);
+          newFilters[category] = priceValues;
+      }
+
+      showFilteredResults(newFilters);
+      setFilters(newFilters);
    }
    
     return ( 
