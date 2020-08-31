@@ -24,7 +24,6 @@ function CheckBox(props) {
         }
 
         setChecked(newChecked);
-
         // 부모 컴퍼넌트에 전달
         props.handleFilters(newChecked)
     }

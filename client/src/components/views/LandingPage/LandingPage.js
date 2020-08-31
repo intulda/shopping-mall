@@ -5,7 +5,9 @@ import {Icon , Col, Card, Row} from 'antd'
 import Meta from 'antd/lib/card/Meta';
 import ImageSlider from '../../utils/ImageSlider';
 import Checkbox from './Sections/CheckBox';
-import { continents } from './Sections/Datas';
+import Radiobox from './Sections/RadioBox';
+import { continents , price } from './Sections/Datas';
+
 
 function LandingPage() {
 
@@ -13,7 +15,10 @@ function LandingPage() {
    const [Skip, setSkip] = useState(0)
    const [Limit, setLimit] = useState(8)     // 처음에 보여주는 개수
    const [PostSize, setPostSize] = useState(0)
-
+   const [Filters, setFilters] = useState({
+        continents : [], 
+        price : []
+   });
    useEffect(() => {
        
         let body = {
@@ -72,8 +77,24 @@ function LandingPage() {
         </Col>    
    })
 
-   const handleFilters = () => {
+   const showFilteredResults = (filters) => {
+        let body = {
+            skip : 0 ,
+            limit : Limit ,
+            filters : filters
+        }
 
+        getProduct(body);
+        setSkip(0);
+   }
+
+   const handleFilters = (filters, category) => {
+  
+      const newFilters = { ...Filters }         // 선택된 값들을 가져온다
+
+      newFilters[category] = filters;
+        debugger;
+      showFilteredResults(newFilters);
    }
    
     return ( 
@@ -83,11 +104,17 @@ function LandingPage() {
             </div>
 
             {/* Filter */}
+            <Row gutter={[16,16]}>
+                <Col lg={12} xs={24}>
+                    {/* CheckBox */}
+                    <Checkbox list={continents} handleFilters={filters => handleFilters(filters, "continents")}/>
+                </Col>
+                <Col lg={12} xs={24}>
+                    {/* RadioBox */}
+                    <Radiobox  list={price} handleFilters={filters => handleFilters(filters, "price")}/>
+                </Col>    
+            </Row>
             
-            {/* CheckBox */}
-            <Checkbox list={continents} handleFilters={filter => handleFilters(filter, "continents")}/>
-
-            {/* RadioBox */}
             {/* Search */}
 
             {/* Cards */}
