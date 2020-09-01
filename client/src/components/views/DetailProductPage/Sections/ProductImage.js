@@ -5,7 +5,7 @@ function ProductImage(props){
     
     const [Images, setImages] = useState([]);
 
-    useEffect(() => { debugger;
+    useEffect(() => { 
         if(props.detail.images && props.detail.images.length > 0){
             let images = [];
 
@@ -17,6 +17,9 @@ function ProductImage(props){
             })
             setImages(images)
         }
+
+    // []   이부분이 렌더링 되면 작동을 시키는데 이미지 부분에 
+    // [[props.detail]] [props.detail] 이 바뀔때마다 라이프 사이클을 한번더 실행시켜줘라
     }, [props.detail])
 
     return (
