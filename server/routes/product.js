@@ -47,6 +47,7 @@ router.post('/products', (req, res) => {
   // product collection에 들어 있는 모든 상품 정보를 가져오기
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  let term = req.body.searchTerm 
 
   console.log("limit : "+limit +", skip : "+skip);
 
@@ -72,17 +73,50 @@ router.post('/products', (req, res) => {
 
   console.log('findArgs',findArgs);
 
-  Product.find(findArgs)
-    .populate("writer") // populate 등록한 사람에 대한 이름 이미지 이메일주소 가 필요해서 사용
-    .skip(skip)
-    .limit(limit)
-    .exec((err, productInfo) => {
-        if(err)   return res.status(400).json({success : false ,err });
-        return res.status(200).json({
-          success : true, productInfo, 
-          postsize : productInfo.length})
+  if(term){
+    Product.find(findArgs)
+      .find({ $text : { $search: term}})
+      .populate("writer") // populate 등록한 사람에 대한 이름 이미지 이메일주소 가 필요해서 사용
+      .skip(skip)
+      .limit(limit)
+      .exec((err, productInfo) => {
+          if(err)   return res.status(400).json({success : false ,err });
+          return res.status(200).json({
+            success : true, productInfo, 
+            postsize : productInfo.length})
     })
+  }else{
+    Product.find(findArgs)
+      .populate("writer") // populate 등록한 사람에 대한 이름 이미지 이메일주소 가 필요해서 사용
+      .skip(skip)
+      .limit(limit)
+      .exec((err, productInfo) => {
+          if(err)   return res.status(400).json({success : false ,err });
+          return res.status(200).json({
+            success : true, productInfo, 
+            postsize : productInfo.length})
+    })
+  }
+
 })
+
+
+router.get('/products_by_id', (req, res) => {
+
+  // 항상 post 는 바디 get 은 query
+  let type = req.query.type;
+  let productId = req.query.id;
+  
+  // productId를 이용해서 DV 에서 productId와 같은 상품을 가져온다.
+  Product.find({_id: productId})
+    .populate('writer')
+    .exec((err, product) => {
+        if(err)   return res.status(400).send(err);
+        return res.status(200).send({success: true , product})
+    })
+ 
+})
+
 
 
 module.exports = router;

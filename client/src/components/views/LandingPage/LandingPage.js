@@ -6,6 +6,7 @@ import Meta from 'antd/lib/card/Meta';
 import ImageSlider from '../../utils/ImageSlider';
 import Checkbox from './Sections/CheckBox';
 import Radiobox from './Sections/RadioBox';
+import SearchFeature from './Sections/SearchFeature';
 import { continents , price } from './Sections/Datas';
 
 
@@ -19,6 +20,8 @@ function LandingPage() {
         continents : [], 
         price : []
    });
+
+   const [searchTerm, setSearchTerm] = useState("")
    useEffect(() => {
        
         let body = {
@@ -67,7 +70,7 @@ function LandingPage() {
 
         return <Col lg={6} md={8} xs={24} key = {index}>
             <Card
-                cover ={<ImageSlider images={product.images}/>}
+                cover ={<a href={`/product/${product._id}`}><ImageSlider images={product.images}/></a>}
             >
                 <Meta
                     title={product.title}
@@ -119,6 +122,21 @@ function LandingPage() {
       showFilteredResults(newFilters);
       setFilters(newFilters);
    }
+
+   // 검색버튼 
+   const updateSeachTerm = (newSearchTerm) => {
+
+        let body = {
+            skip : 0, 
+            limit : Limit , 
+            filters : Filters ,
+            searchTerm : newSearchTerm
+        }
+
+        setSkip(0);
+        setSearchTerm(newSearchTerm);
+        getProduct(body);
+   }
    
     return ( 
         <div style={{width: '75%' ,margin: '3rem auto'}}>
@@ -139,7 +157,11 @@ function LandingPage() {
             </Row>
             
             {/* Search */}
-
+            <div style={{display:'flex' , justifyContent: 'flex-end', margin: '1rem auto'}}>
+                <SearchFeature
+                    refreshFunction={updateSeachTerm}
+                />
+            </div>
             {/* Cards */}
             <Row gutter={16, 16}>
             {renderCards}
