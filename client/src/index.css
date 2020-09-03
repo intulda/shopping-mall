@@ -1,4 +1,7 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
+#components-grid-demo-flex-order [class~='ant-row'] {
+  background: rgba(128, 128, 128, 0.08);
+}
 
 body {
   margin: 0;
@@ -32,7 +35,6 @@ body {
 input.error {
   border-color: red;
 }
-
 
 .input-feedback {
   color: red;

@@ -10,8 +10,6 @@ function DetailProductPage(props){
 
     const productId = props.match.params.productId 
 
-    const [Product, setProduct] = useState({})
-
     useEffect(() => {
         
         axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
