@@ -16,13 +16,15 @@ const adminProductSchema = mongoose.Schema({
        type : Array ,
        default : []
    }, 
-   Date : {         // 현재날짜
+   date : {         // 현재날짜
        type : Date 
    },
-   sizeInfo : {     // 사이즈 정보
-       type : Array,
-       default : []
-   }
+   leftSize : {     // 사이즈 정보
+       type : String
+   },
+   rightSize : {     // 사이즈 정보
+        type : String
+    }
 })
 
 

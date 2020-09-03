@@ -41,3 +41,11 @@ input.error {
   height: 5px;
   margin-top: -12px;
 }
+
+.success {
+  background-color: lightgreen;
+}
+
+.failure {
+  background-color: lightcoral;
+}
