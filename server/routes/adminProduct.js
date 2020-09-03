@@ -43,5 +43,51 @@ router.post('/save', (req, res) => {
     });
 })
 
+// 조회
+router.post('/list', (req, res) => {
+
+  // product collection에 들어 있는 모든 상품 정보를 가져오기
+  let limit = req.body.limit ? parseInt(req.body.limit) : 20;
+  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  
+
+  console.log("limit : "+limit +", skip : "+skip);
+
+  let findArgs = {};
+
+  for(let key in req.body.filters){
+    
+    if(req.body.filters[key].length > 0){
+
+        if(key === "price"){
+          findArgs[key] = {
+             // Grater Than equals
+             $gte : req.body.filters[key][0],     // 몽고디비에서 이것보다 크거나 같은
+             // less than equals
+             $lte : req.body.filters[key][1],     // 몽고디비에서 이것보다 같거나 같은
+          }
+        }else{
+           findArgs[key] = req.body.filters[key];
+        }
+        
+    }
+  }
+
+  console.log('findArgs',findArgs);
+ 
+  AdminProduct.find(findArgs)
+    .populate("writer") // populate 등록한 사람에 대한 이름 이미지 이메일주소 가 필요해서 사용
+    .skip(skip)
+    .limit(limit)
+    .exec((err, adminProductInfo) => {
+        if(err)   return res.status(400).json({success : false ,err });
+        return res.status(200).json({
+          success : true, adminProductInfo, 
+          postsize : adminProductInfo.length})
+  })
+  
+
+})
+
 
 module.exports = router;
