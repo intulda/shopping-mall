@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
-const adminProductSchema = mongoose.Schema({
+const AdminProductSchema = mongoose.Schema({
    writer : {       // 글쓴이
        type :  Schema.Types.ObjectId ,         
        ref : 'User'
@@ -28,6 +28,6 @@ const adminProductSchema = mongoose.Schema({
 })
 
 
-const adminProduct = mongoose.model('adminProduct', adminProductSchema);
+const AdminProduct = mongoose.model('AdminProduct', AdminProductSchema);
 
-module.exports = { adminProduct }
+module.exports = { AdminProduct }

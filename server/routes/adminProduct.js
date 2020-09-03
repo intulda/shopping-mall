@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const {adminProduct} = require('../models/adminProduct')
+const {AdminProduct} = require('../models/AdminProduct')
 
 //=================================
 //            adminProduct
@@ -33,9 +33,9 @@ var storage = multer.diskStorage({
 
 
 router.post('/save', (req, res) => {
-
+    console.log(req.body);
     // 받아온 정보들을 DB에 넣어준다.
-    const adminProduct = new adminProduct(req.body);
+    const adminProduct = new AdminProduct(req.body);
 
     adminProduct.save((err) => {
       if(err)   return res.status(400).json({success : false , err});

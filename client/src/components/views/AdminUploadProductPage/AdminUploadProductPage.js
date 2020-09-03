@@ -13,7 +13,7 @@ function AdminUploadProductPage(props)  {
     const [Description, setDescription] = useState("")           // 설명
     const [LeftSize, setLeftSize] = useState("")                 // 사이즈 정보
     const [RightSize, setRightSize] = useState("")               // 사이즈 정보  
-    const {Images , setImages} = useState([]);
+    const [Images , setImages] = useState([]);
 
     // 이건 일단패스
     const validationCheck = {
@@ -49,7 +49,7 @@ function AdminUploadProductPage(props)  {
     }
 
     // 이미지 정보 변경
-    const updateImages = (newImages) => {
+    const updateImages = (newImages) => { debugger;
         setImages(newImages)
     }
 
@@ -104,17 +104,17 @@ function AdminUploadProductPage(props)  {
             leftSize : LeftSize ,
             rightSize : RightSize
         }
-        /*
-        Axios.post('/api/product', body)
-            .then(response => {
+        
+        Axios.post('/api/adminProduct/save', body)
+            .then(response => { debugger;
                 if (response.data.success) {
                     alert('상품 업로드에 성공 했습니다.')
-                    props.history.push('/')
+                    props.history.push('/adminList');
                 } else {
                     alert('상품 업로드에 실패 했습니다.')
                 }
             })
-            */
+            
     }
 
 
