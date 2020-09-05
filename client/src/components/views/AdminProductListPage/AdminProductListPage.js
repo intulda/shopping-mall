@@ -34,7 +34,7 @@ function AdminProductListPage(){
 
 const gridMain = AdminProductInfo.map((product, index) => {
     return <Row key={index}>
-        <Col span={4} order={5} onClick>
+        <Col span={4} order={5}>
             <a href>{product.title}</a>
         </Col>
         <Col span={4} order={4} >
