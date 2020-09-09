@@ -68,4 +68,11 @@ router.get("/logout", auth, (req, res) => {
     });
 });
 
+router.post("/addToCart", auth, (req, res) => {
+   
+    // 먼저 User Collection 에 해당 유저의 정보를 가져오기
+
+    
+});
+
 module.exports = router;

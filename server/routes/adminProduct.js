@@ -32,7 +32,7 @@ var storage = multer.diskStorage({
   })
 
 
-router.post('/save', (req, res) => { console.log("name");
+router.post('/save', (req, res) => {
     console.log(req.body);
     // 받아온 정보들을 DB에 넣어준다.
     const adminProduct = new AdminProduct(req.body);

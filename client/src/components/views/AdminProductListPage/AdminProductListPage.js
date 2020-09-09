@@ -32,14 +32,24 @@ function AdminProductListPage(){
     })
 }
 
+<<<<<<< HEAD
 const gridMainOnClick = (event) => {
+=======
+const onRowClick = (event) => {
+>>>>>>> e7ab124ff0d2f4ff773659dd29889fd3cef7634f
     debugger;
 }
 
 const gridMain = AdminProductInfo.map((product, index) => {
+<<<<<<< HEAD
     return <Row key={index} onClick={gridMainOnClick}>
         <Col span={4} order={5} >
             {product.title}
+=======
+    return <Row key={index} onClick={onRowClick}>
+        <Col span={4} order={5}>
+            <a href>{product.title}</a>
+>>>>>>> e7ab124ff0d2f4ff773659dd29889fd3cef7634f
         </Col>
         <Col span={4} order={4} >
             {product.description}
