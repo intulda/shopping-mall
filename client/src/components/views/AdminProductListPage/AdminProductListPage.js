@@ -32,10 +32,14 @@ function AdminProductListPage(){
     })
 }
 
+const gridMainOnClick = (event) => {
+    debugger;
+}
+
 const gridMain = AdminProductInfo.map((product, index) => {
-    return <Row key={index}>
-        <Col span={4} order={5} onClick>
-            <a href>{product.title}</a>
+    return <Row key={index} onClick={gridMainOnClick}>
+        <Col span={4} order={5} >
+            {product.title}
         </Col>
         <Col span={4} order={4} >
             {product.description}
