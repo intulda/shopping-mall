@@ -2,15 +2,19 @@ import React from 'react';
 import {Button, Descriptions } from 'antd'
 /* 리덕스 훅 */
 import {useDispatch} from 'react-redux';
+import {addToCart} from '../../../../_actions/user_actions';
 
 
 function ProductInfo(props){ 
 
     const dispatch = useDispatch();
+
+
     const clickHandler = () => {
  
         // 필요한 정보를 Cart 필드에다가 넣어 준다.
         // 필요한정보 : 상품 Id, 갯수, 날짜 
+        dispatch(addToCart(props.detail._id))
     }
 
     return(

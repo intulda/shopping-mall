@@ -79,8 +79,42 @@ router.post("/addToCart", auth, (req, res) => {
                 if(item.id === req.body.productId){
                     duplicate = true;
                 }
-            })
-            req.body.productId
+            });
+
+            // 상품이 이미 있을때 
+            if(duplicate){
+                // 하나를 찾은다음에 업데이트
+                User.findOneAndUpdate(
+                    {_id : req.user._id , "cart.id": req.body.productId},
+                    { $inc : {"cart.$.quantity": 1}} ,
+                    { new : true} ,
+                    (err , userInfo) => {
+                        if(err)     return res.status(200).json({ success : false , err});
+
+                        res.status(200).send(userInfo.cart)
+                    }
+                )
+            // 상품이 이미 있지 않을때
+            }else{
+                User.findOneAndUpdate(
+                    {_id : req.userId} , 
+                    {
+                        $push : {
+                            cart : {
+                                id : req.body.propductId , 
+                                qquantity : 1,
+                                date : Date.now()
+                            }
+                        }
+                    },
+                    { new : true },
+                    (err, userInfo) => {
+                        if(err) return res.status(400).json({success : false, err})
+                        res.status(200).send(userInfo.cart)
+                    }
+                )
+            }
+            
 
 
     });
