@@ -48,7 +48,7 @@ export function logoutUser(){
     }
 }
 
-export function addToCart(id){
+export function addToCart(id){ debugger;
     let body = {
         productId : id 
     }
