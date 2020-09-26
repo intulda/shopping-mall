@@ -103,7 +103,7 @@ router.post("/addToCart", auth, (req, res) => {
                         $push : {
                             cart : {
                                 id : req.body.productId , 
-                                qquantity : 1,
+                                quantity : 1,
                                 date : Date.now()
                             }
                         }
