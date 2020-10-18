@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Button, Form, Input } from 'antd';
+import {  Button, Form, Input } from 'antd';
 import FileUpload from '../../utils/FileUpload';
 import Axios from 'axios';
 const { TextArea } = Input;
@@ -105,9 +105,9 @@ function UploadProductPage(props) {
                 </select>
                 <br />
                 <br />
-                <button type="submit">
+                <Button type="submit">
                     확인
-                </button>
+                </Button>
             </Form>
 
 
