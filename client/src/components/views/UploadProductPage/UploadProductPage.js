@@ -80,7 +80,7 @@ function UploadProductPage(props) {
                 <h2> 여행 상품 업로드</h2>
             </div>
 
-            <Form onSubmit={submitHandler}>
+            <Form onSu bmit={submitHandler}>
                 {/* DropZone */}
                 <FileUpload refreshFunction={updateImages} />
 
