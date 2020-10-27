@@ -13,7 +13,7 @@ function FileUpload(props) {
         let formData = new FormData();
         const config = {
             header: { 'content-type': 'multipart/fomr-data' }
-        }
+        } 
         formData.append("file", files[0])
 
         axios.post('/api/product/image', formData, config)
