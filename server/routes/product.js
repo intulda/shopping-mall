@@ -77,8 +77,8 @@ router.post('/products', (req, res) => {
     Product.find(findArgs)
       .find({ $text : { $search: term}})
       .populate("writer") // populate 등록한 사람에 대한 이름 이미지 이메일주소 가 필요해서 사용
-      .skip(skip)
-      .limit(limit)
+      .skip(skip)     // 처음은  0번째
+      .limit(limit)   // 몇개가져올지 8개
       .exec((err, productInfo) => {
           if(err)   return res.status(400).json({success : false ,err });
           return res.status(200).json({
