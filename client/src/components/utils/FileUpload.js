@@ -8,12 +8,12 @@ function FileUpload(props) {
 
     const [Images, setImages] = useState([])
 
-    const dropHandler = (files) => {
+    const dropHandler = (files) => { 
 
         let formData = new FormData();
         const config = {
             header: { 'content-type': 'multipart/fomr-data' }
-        }
+        } 
         formData.append("file", files[0])
 
         axios.post('/api/product/image', formData, config)
@@ -23,14 +23,14 @@ function FileUpload(props) {
                     props.refreshFunction([...Images, response.data.filePath])
 
 
-                } else {
+                } else {  
                     alert('파일을 저장하는데 실패했습니다.')
                 }
             })
     }
 
 
-    const deleteHandler = (image) => {
+    const deleteHandler = (image) => { debugger;
         const currentIndex = Images.indexOf(image);
         let newImages = [...Images]
         newImages.splice(currentIndex, 1)
