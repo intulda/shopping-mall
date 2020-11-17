@@ -75,6 +75,7 @@ router.post('/products', (req, res) => {
 
   if(term){
     Product.find(findArgs)
+      // 조회하고싶은 거에 대해서
       .find({ $text : { $search: term}})
       .populate("writer") // populate 등록한 사람에 대한 이름 이미지 이메일주소 가 필요해서 사용
       .skip(skip)     // 처음은  0번째
@@ -107,7 +108,7 @@ router.get('/products_by_id', (req, res) => {
   let type = req.query.type;
   let productId = req.query.id;
   
-  // productId를 이용해서 DV 에서 productId와 같은 상품을 가져온다.
+  // productId를 이용해서 DB 에서 productId와 같은 상품을 가져온다.
   Product.find({_id: productId})
     .populate('writer')
     .exec((err, product) => {

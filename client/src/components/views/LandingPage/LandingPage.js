@@ -105,7 +105,6 @@ function LandingPage() {
         return array;
    }
 
-
    const handleFilters = (filters, category) => {
   
       const newFilters = { ...Filters }         // 선택된 값들을 가져온다
