@@ -46,7 +46,7 @@ router.post('/products', (req, res) => {
 
   // product collection에 들어 있는 모든 상품 정보를 가져오기
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
-  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  let skip = req.body.skip ? parseInt(req.body.skip) : 0; 
   let term = req.body.searchTerm 
 
   console.log("limit : "+limit +", skip : "+skip);
@@ -100,15 +100,23 @@ router.post('/products', (req, res) => {
 
 })
 
-
+// id=12421421, 1412412, 1412412  type = array
 router.get('/products_by_id', (req, res) => {
 
   // 항상 post 는 바디 get 은 query
   let type = req.query.type;
-  let productId = req.query.id;
+  let productIds = req.query.id;
   
+  if(type === "array"){
+    // id=12421421, 1412412, 1412412 이거를
+    // productIds = [12421421, 1412412, 1412412 ] 이런식으로 바꿔주기
+    let ids = req.query.id.split(",");
+    productIds = ids.map(item => {
+      return item;
+    })
+  }
   // productId를 이용해서 DV 에서 productId와 같은 상품을 가져온다.
-  Product.find({_id: productId})
+  Product.find({_id: {$in : productIds}})
     .populate('writer')
     .exec((err, product) => {
         if(err)   return res.status(400).send(err);

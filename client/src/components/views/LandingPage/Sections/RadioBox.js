@@ -5,7 +5,7 @@ const { Panel }  = Collapse;
 
 function RadioBox(props){
 
-    const [Value ,setValue] = useState(0);
+      const [Value ,setValue] = useState(0);
 
     const renderRadioBox = () => (
         props.list && props.list.map(value => (
