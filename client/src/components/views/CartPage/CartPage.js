@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import {useDispatch} from 'react-redux';
+import {getCartItmes} from '../../../_actions/user_actions';
 function CartPage(props) {
 
     const dispatch = useDispatch();
