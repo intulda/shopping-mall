@@ -110,7 +110,7 @@ function LandingPage() {
       const newFilters = { ...Filters }         // 선택된 값들을 가져온다
 
       newFilters[category] = filters;
-        debugger;
+        
       showFilteredResults(newFilters);
 
       if(category === "price"){

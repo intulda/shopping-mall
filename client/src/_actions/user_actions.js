@@ -49,7 +49,7 @@ export function logoutUser(){
     }
 }
 
-export function addToCart(id){ debugger;
+export function addToCart(id){ 
     let body = {
         productId : id 
     }
@@ -63,15 +63,26 @@ export function addToCart(id){ debugger;
 }
 
 export function getCartItmes(cartItems, userCart){ 
-   
-    const request = axios.get(`/api/product/product_by_id?id=${cartItems}&type=array`, body)
-    .then(response =>
+    
+    const request = axios.get(`/api/product/products_by_id?id=${cartItems}&type=array`)
+    .then(response => {
 
             // cartItems 들에 해당하는 정보들을 
             //Product Collection에서 가져온 후에
             // Quantity 정보를 넣어준다
+            userCart.forEach(cartItems => {
+              
+                response.data.forEach((productDetail, index) => {
+                  
+                    if(cartItems.id === productDetail._id){
+                        response.data[index].quantity = cartItems.quantity;
+                    }
 
-        );
+                });
+            })
+         
+            return response.data;
+        });
 
     return {
         type: GET_CART_ITMES,
