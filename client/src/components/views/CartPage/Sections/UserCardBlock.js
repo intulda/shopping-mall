@@ -23,9 +23,9 @@ function UserCardBlock(props){
                     $ {product.price} 
                 </td>
                 <td>
-                    <butto>
+                    <button>
                         remove
-                    </butto>
+                    </button>
                 </td>
             </tr>
         ))
